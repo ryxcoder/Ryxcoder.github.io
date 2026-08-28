@@ -1,1 +1,265 @@
-.
+/* Base Reset & Font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #111111;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 40px;
+    margin: 20px auto 50px auto;
+    white-space: nowrap;
+    width: max-content;
+    max-width: 100%;
+}
+
+.navbar::-webkit-scrollbar {
+    display: none;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.navbar a.active {
+    background: #111;
+    color: #fff;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding-top: 10px;
+}
+
+/* ========================================= */
+/* PREMIUM ENTRY ANIMATIONS (Staggered Fade) */
+/* ========================================= */
+.text-content .badge, 
+.text-content h1, 
+.text-content h2, 
+.text-content p, 
+.text-content .skills-box,
+.text-content .cards-container,
+.text-content .content-card,
+.text-content .buttons {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.text-content .badge { animation-delay: 0.1s; }
+.text-content h1   { animation-delay: 0.2s; }
+.text-content h2   { animation-delay: 0.3s; }
+.text-content p    { animation-delay: 0.4s; }
+.text-content .skills-box,
+.text-content .cards-container,
+.text-content .content-card { animation-delay: 0.5s; }
+.text-content .buttons { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================= */
+/* TYPOGRAPHY & COMPONENTS                   */
+/* ========================================= */
+
+.badge {
+    background: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+h1 {
+    font-size: 3.2rem;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #111111, #555555);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    max-width: 650px;
+}
+
+/* Cards Grid / Container for Projects & Services */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 650px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.content-card {
+    background: #fafafa;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid #eaeaea;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.content-card:hover {
+    border-color: #111;
+    transform: translateY(-2px);
+}
+
+.content-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 8px;
+}
+
+.content-card p {
+    font-size: 14.5px;
+    margin-bottom: 12px;
+}
+
+/* Tag for tech stack inside project cards */
+.tag {
+    display: inline-block;
+    background: #eeeeee;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Skills Box Styling */
+.skills-box {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #eaeaea;
+    width: 100%;
+    max-width: 650px;
+}
+
+.skills-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skills-list li {
+    font-size: 15px;
+    color: #444;
+    position: relative;
+    padding-left: 20px;
+}
+
+.skills-list li::before {
+    content: "•";
+    color: #111;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+button, .btn-primary {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+    background: #111;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1.5px solid #eaeaea;
+    color: #111;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    border-color: #111;
+    transform: translateY(-2px);
+}
+
+/* Desktop screen adjustments */
+@media (min-width: 768px) {
+    body {
+        padding: 50px;
+        max-width: 900px;
+    }
+    h1 {
+        font-size: 4.5rem;
+    }
+}
