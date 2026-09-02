@@ -8,23 +8,39 @@
     <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     
-    <!-- ULTRA-PREMIUM BENTO GRID & GLASSMORPHISM STYLES -->
+    <!-- ULTRA-PREMIUM BENTO GRID, DARK THEME & DYNAMIC SCROLL FX -->
     <style>
+        /* Force Deep Dark Mode Base */
+        body {
+            background-color: rgb(18, 14, 31); /* Starting Premium Dark Color */
+            color: #ffffff !important;
+        }
+
+        /* Override Global Navbar to Dark Glass */
+        .navbar {
+            background: rgba(10, 10, 10, 0.7) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(15px) !important;
+        }
+        .navbar a { color: #888 !important; }
+        .navbar a.active, .navbar a:hover { color: #fff !important; background: rgba(255,255,255,0.1) !important; }
+
         /* Ambient Background Glow */
         .ambient-glow {
             position: fixed;
-            top: 20%;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
-            width: 60vw;
-            height: 60vw;
-            max-width: 500px;
-            max-height: 500px;
-            background: linear-gradient(45deg, rgba(255, 0, 127, 0.15), rgba(122, 0, 255, 0.15));
-            filter: blur(80px);
+            width: 70vw;
+            height: 70vw;
+            max-width: 600px;
+            max-height: 600px;
+            background: linear-gradient(45deg, rgba(122, 0, 255, 0.25), rgba(255, 0, 127, 0.15));
+            filter: blur(90px);
             border-radius: 50%;
             z-index: -1;
             animation: floatGlow 10s ease-in-out infinite alternate;
+            transition: opacity 0.1s ease;
         }
 
         @keyframes floatGlow {
@@ -34,20 +50,21 @@
 
         /* Hero Text Update */
         .about-header h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 900;
             letter-spacing: -2px;
-            background: linear-gradient(to right, #ffffff, #777777);
+            background: linear-gradient(to right, #ffffff, #666666);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .about-header p {
-            color: #888;
+            color: #a0a0a0;
             font-size: 1.1rem;
             max-width: 600px;
             margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         /* The Bento Box Grid */
@@ -88,12 +105,12 @@
         .bento-card:hover {
             border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
         }
 
         /* Card Internal Styling */
         .bento-icon {
-            width: 40px; height: 40px;
+            width: 45px; height: 45px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             display: flex; justify-content: center; align-items: center;
@@ -101,10 +118,10 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .bento-icon svg { width: 20px; height: 20px; fill: #fff; }
+        .bento-icon svg { width: 22px; height: 22px; fill: #fff; }
 
         .bento-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 10px;
@@ -113,7 +130,7 @@
         .bento-text {
             font-size: 0.95rem;
             color: #999;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* Glowing Accent for specific cards */
@@ -126,7 +143,7 @@
         .accent-gradient::before {
             content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
             background: linear-gradient(90deg, transparent, #7a00ff, #ff007f, transparent);
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
         /* Desktop Grid */
@@ -142,25 +159,23 @@
 
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="services.html">Services</a>
-        </div>
-        <a href="contact.html" class="contact-btn">Contact Me</a>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
     </nav>
 
     <!-- Masterpiece About Content -->
-    <main class="hero-dark" style="height: auto; min-height: 100vh; padding: 120px 20px 50px 20px; justify-content: flex-start;">
+    <main class="hero-section" style="padding-top: 100px; justify-content: flex-start; align-items: center; width: 100%;">
         
-        <div class="about-header" style="width: 100%; max-width: 800px; text-align: left;">
+        <div class="about-header" style="width: 100%; max-width: 800px; text-align: left; padding: 0 10px;">
             <h1 style="opacity: 0; animation: bentoFadeUp 0.8s forwards;">Behind the Code.</h1>
             <p style="opacity: 0; animation: bentoFadeUp 0.8s forwards 0.1s;">I architect native experiences and automated solutions with a relentless focus on dark aesthetics, clean logic, and pixel-perfect execution.</p>
         </div>
         
         <!-- Bento Box Grid -->
-        <div class="bento-grid">
+        <div class="bento-grid" style="padding: 0 10px;">
             
             <!-- Box 1: Core Stack -->
             <div class="bento-card card-large accent-gradient">
@@ -189,8 +204,8 @@
                 <p class="bento-text">I believe in "Less is More". I am obsessed with deep dark modes, bold typography, strategic whitespace, and buttery-smooth animations that make UIs feel alive.</p>
             </div>
 
-            <!-- Box 4: The Vibe (Off-screen) -->
-            <div class="bento-card card-large">
+            <!-- Box 4: The Vibe -->
+            <div class="bento-card card-large" style="margin-bottom: 40px;">
                 <div class="bento-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
                 </div>
@@ -203,5 +218,31 @@
     </main>
     
     <script src="script.js"></script>
+    
+    <!-- 🟢 THE SCROLL MAGIC SCRIPT 🟢 -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            
+            // Maximum scroll limit jahan color ekdum black ho jayega
+            let ratio = scrollY / 500; 
+            if (ratio > 1) ratio = 1;
+            
+            // Start Color RGB: (18, 14, 31) -> Premium Dark Purple/Blue
+            // End Color RGB: (0, 0, 0) -> Pure Black
+            const r = Math.round(18 * (1 - ratio));
+            const g = Math.round(14 * (1 - ratio));
+            const b = Math.round(31 * (1 - ratio));
+            
+            // Apply the dynamic background color smoothly
+            document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            
+            // Glow effect ko neeche jaane par dheere se kam karna
+            const glow = document.querySelector('.ambient-glow');
+            if(glow) {
+                glow.style.opacity = 1 - (ratio * 0.9); // Fades out slowly
+            }
+        });
+    </script>
 </body>
 </html>
