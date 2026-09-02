@@ -6,45 +6,200 @@
     <title>About | Prince - Android Developer</title>
     
     <link rel="stylesheet" href="style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- ULTRA-PREMIUM BENTO GRID & GLASSMORPHISM STYLES -->
+    <style>
+        /* Ambient Background Glow */
+        .ambient-glow {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60vw;
+            height: 60vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: linear-gradient(45deg, rgba(255, 0, 127, 0.15), rgba(122, 0, 255, 0.15));
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: floatGlow 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(-50%, 0) scale(1); }
+            100% { transform: translate(-50%, 30px) scale(1.1); }
+        }
+
+        /* Hero Text Update */
+        .about-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #ffffff, #777777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .about-header p {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* The Bento Box Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Glassmorphism Cards */
+        .bento-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: bentoFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Staggered Animations */
+        .bento-card:nth-child(1) { animation-delay: 0.1s; }
+        .bento-card:nth-child(2) { animation-delay: 0.2s; }
+        .bento-card:nth-child(3) { animation-delay: 0.3s; }
+        .bento-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes bentoFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bento-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Card Internal Styling */
+        .bento-icon {
+            width: 40px; height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bento-icon svg { width: 20px; height: 20px; fill: #fff; }
+
+        .bento-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .bento-text {
+            font-size: 0.95rem;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* Glowing Accent for specific cards */
+        .card-large { grid-column: 1 / -1; }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(30,30,30,0.9));
+        }
+
+        .accent-gradient::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, #7a00ff, #ff007f, transparent);
+            opacity: 0.5;
+        }
+
+        /* Desktop Grid */
+        @media (min-width: 768px) {
+            .bento-grid { grid-template-columns: 1fr 1fr; }
+            .card-large { grid-column: 1 / -1; }
+        }
+    </style>
 </head>
 <body>
 
+    <div class="ambient-glow"></div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="services.html">Services</a>
+        </div>
+        <a href="contact.html" class="contact-btn">Contact Me</a>
     </nav>
 
-    <!-- About Section Content -->
-    <main class="hero-section">
-        <div class="text-content">
-            <span class="badge">• Background & Expertise</span>
+    <!-- Masterpiece About Content -->
+    <main class="hero-dark" style="height: auto; min-height: 100vh; padding: 120px 20px 50px 20px; justify-content: flex-start;">
+        
+        <div class="about-header" style="width: 100%; max-width: 800px; text-align: left;">
+            <h1 style="opacity: 0; animation: bentoFadeUp 0.8s forwards;">Behind the Code.</h1>
+            <p style="opacity: 0; animation: bentoFadeUp 0.8s forwards 0.1s;">I architect native experiences and automated solutions with a relentless focus on dark aesthetics, clean logic, and pixel-perfect execution.</p>
+        </div>
+        
+        <!-- Bento Box Grid -->
+        <div class="bento-grid">
             
-            <h1>About Me</h1>
-            <h2>Crafting Digital Excellence</h2>
-            
-            <p>Hello! I'm <strong>Prince</strong>, a passionate and detail-oriented Android Developer. I specialize in building high-performance, native mobile applications that combine robust architecture with clean, minimalist user interfaces.</p>
-            
-            <p>My journey in development is driven by a deep love for solving complex problems and turning creative concepts into seamless digital experiences. Whether it's architecting smooth native apps using Kotlin, optimizing performance, or structuring clean code, I focus on precision and quality.</p>
-            
-            <div class="skills-box">
-                <h3 style="font-size: 1.1rem; margin-bottom: 12px; font-weight: 700;">Core Expertise & Stack</h3>
-                <ul class="skills-list">
-                    <li>Kotlin & Native Android Development</li>
-                    <li>UI/UX Architecture & Minimalist Design</li>
-                    <li>App Performance & Memory Optimization</li>
-                    <li>Git, GitHub & Automated CI/CD (Vercel)</li>
-                </ul>
+            <!-- Box 1: Core Stack -->
+            <div class="bento-card card-large accent-gradient">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                </div>
+                <h3 class="bento-title">The Android & Web Architect</h3>
+                <p class="bento-text">Specializing in native Android development using Kotlin. Beyond mobile, I build dynamic, responsive web interfaces using HTML, CSS, JavaScript, and React, ensuring every digital touchpoint feels premium and intuitive.</p>
             </div>
 
-            <div class="buttons" style="margin-top: 35px;">
-                <a href="index.html" class="btn-primary" style="text-decoration: none; display: inline-block;">← Back to Home</a>
+            <!-- Box 2: Automations -->
+            <div class="bento-card">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 15H9v-2h3v2zm5 0h-3v-2h3v2zM12 11H9V9h3v2zm5 0h-3V9h3v2z"/></svg>
+                </div>
+                <h3 class="bento-title">Bots & Automations</h3>
+                <p class="bento-text">Crafting intelligent automated solutions. I develop and host custom Telegram bots and interactive Mini Apps (using Node.js and Python) that handle complex workflows effortlessly.</p>
             </div>
+
+            <!-- Box 3: Design Philosophy -->
+            <div class="bento-card">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v5h5v-2h-3z"/></svg>
+                </div>
+                <h3 class="bento-title">The Aesthetic</h3>
+                <p class="bento-text">I believe in "Less is More". I am obsessed with deep dark modes, bold typography, strategic whitespace, and buttery-smooth animations that make UIs feel alive.</p>
+            </div>
+
+            <!-- Box 4: The Vibe (Off-screen) -->
+            <div class="bento-card card-large">
+                <div class="bento-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </div>
+                <h3 class="bento-title">Beyond the Screen</h3>
+                <p class="bento-text">When my IDE is closed, I'm usually strategizing my next move on the online chess board, curating sharp AI prompts for aesthetic visuals, or deep in the zone vibing to Seedhe Maut tracks like 11k and Kohra.</p>
+            </div>
+
         </div>
+
     </main>
     
     <script src="script.js"></script>
