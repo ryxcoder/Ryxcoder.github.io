@@ -6,11 +6,88 @@
     <title>Services | Prince - Android Developer</title>
     
     <link rel="stylesheet" href="style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Force Deep Dark Mode Base (Matches Ecosystem) */
+        body { background-color: rgb(18, 14, 31); color: #ffffff !important; overflow-x: hidden; }
+
+        /* Premium Glass Navbar */
+        .navbar {
+            display: flex; overflow-x: auto; gap: 5px; padding: 8px 10px;
+            background: rgba(15, 15, 15, 0.65) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important;
+            border-radius: 40px; position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            white-space: nowrap; width: max-content; max-width: 90%; z-index: 100;
+        }
+        .navbar::-webkit-scrollbar { display: none; }
+        .navbar a { text-decoration: none; color: #999 !important; padding: 10px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; transition: all 0.3s ease; }
+        .navbar a.active, .navbar a:hover { background: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
+
+        /* Ambient Background Glow */
+        .ambient-glow {
+            position: fixed; top: 15%; left: 50%; transform: translateX(-50%);
+            width: 70vw; height: 70vw; max-width: 600px; max-height: 600px;
+            background: linear-gradient(45deg, rgba(122, 0, 255, 0.2), rgba(255, 0, 127, 0.15));
+            filter: blur(90px); border-radius: 50%; z-index: -1;
+            animation: floatGlow 10s ease-in-out infinite alternate;
+        }
+        @keyframes floatGlow { 0% { transform: translate(-50%, 0) scale(1); } 100% { transform: translate(-50%, 30px) scale(1.1); } }
+
+        /* Main Container */
+        .services-section { padding: 120px 20px 60px 20px; max-width: 900px; margin: 0 auto; }
+
+        .page-header h1 {
+            font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; letter-spacing: -2px;
+            background: linear-gradient(to right, #ffffff, #666666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards;
+        }
+        .page-header p {
+            color: #a0a0a0; font-size: 1.1rem; max-width: 600px; line-height: 1.6; margin-bottom: 50px;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards 0.1s;
+        }
+
+        /* Services Grid */
+        .services-grid { display: flex; flex-direction: column; gap: 20px; }
+
+        .service-card {
+            background: rgba(20, 20, 20, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px; padding: 30px; display: flex; gap: 20px; align-items: flex-start;
+            transition: all 0.4s ease; opacity: 0; transform: translateY(30px);
+            animation: fadeUp 0.8s forwards; position: relative; overflow: hidden;
+        }
+        
+        .service-card:nth-child(1) { animation-delay: 0.2s; }
+        .service-card:nth-child(2) { animation-delay: 0.3s; }
+        .service-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .service-card:hover {
+            border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .service-icon {
+            width: 60px; height: 60px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+            border-radius: 16px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1);
+        }
+        .service-icon svg { width: 30px; height: 30px; fill: #fff; }
+
+        .service-content h3 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+        .service-content p { font-size: 1rem; color: #999; line-height: 1.6; margin-bottom: 15px; }
+
+        .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tools span { font-size: 12px; font-weight: 600; color: #ccc; background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 20px; }
+
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) { .service-card { flex-direction: column; } }
+    </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
+    <div class="ambient-glow"></div>
+
     <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -19,39 +96,55 @@
         <a href="contact.html">Contact</a>
     </nav>
 
-    <!-- Services Content -->
-    <main class="hero-section">
-        <div class="text-content">
-            <span class="badge">• What I Offer</span>
+    <main class="services-section">
+        <div class="page-header">
+            <h1>Expertise.</h1>
+            <p>From native mobile applications to automated backend bots, I deliver end-to-end digital solutions tailored for performance and design.</p>
+        </div>
+        
+        <div class="services-grid">
             
-            <h1>My Services</h1>
-            <h2>Professional Development Solutions</h2>
-            
-            <p>I help individuals and businesses turn their creative ideas into high-performing, elegant digital products with a heavy focus on user experience and speed.</p>
-            
-            <div class="cards-container">
-                <div class="content-card">
-                    <h3>📱 Native Android App Development</h3>
-                    <p>Building robust, scalable, and fast native mobile applications from scratch using modern Kotlin, clean architecture, and Android Jetpack.</p>
-                </div>
-                
-                <div class="content-card">
-                    <h3>🎨 Minimalist UI/UX Implementation</h3>
-                    <p>Translating modern design concepts into clean, responsive, and pixel-perfect layouts tailored specifically for mobile and desktop screens.</p>
-                </div>
-
-                <div class="content-card">
-                    <h3>⚡ Performance & Optimization</h3>
-                    <p>Refactoring existing codebases, eliminating memory leaks, and significantly improving application rendering speed and battery efficiency.</p>
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17.523 15.341l1.834-3.176a.395.395 0 0 0-.142-.538.397.397 0 0 0-.54.143l-1.87 3.24a10.9 10.9 0 0 0-4.805-1.127 10.93 10.93 0 0 0-4.805 1.127l-1.87-3.24a.395.395 0 0 0-.54-.143.395.395 0 0 0-.142.538l1.834 3.176C2.656 17.531.144 21.688 0 26.54h24c-.144-4.852-2.656-9.009-6.477-11.199zM6.5 22.793a1.442 1.442 0 1 1-.001-2.885 1.442 1.442 0 0 1 0 2.885zm11 0a1.442 1.442 0 1 1-.001-2.885 1.442 1.442 0 0 1 0 2.885z"/></svg></div>
+                <div class="service-content">
+                    <h3>Native Android Development</h3>
+                    <p>I build robust, scalable, and high-performance native Android applications using modern architectures. Focused on smooth animations and deep native integrations.</p>
+                    <div class="tools"><span>Kotlin</span><span>Android Studio</span><span>Firebase</span></div>
                 </div>
             </div>
 
-            <div class="buttons" style="margin-top: 35px;">
-                <a href="index.html" class="btn-primary" style="text-decoration: none; display: inline-block;">← Back to Home</a>
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 15H9v-2h3v2zm5 0h-3v-2h3v2zM12 11H9V9h3v2zm5 0h-3V9h3v2z"/></svg></div>
+                <div class="service-content">
+                    <h3>Bots & Automations</h3>
+                    <p>Developing custom Telegram bots and interactive Mini Apps (like Tap Duel). I automate complex workflows and deploy reliable server-side logic.</p>
+                    <div class="tools"><span>Node.js</span><span>Python</span><span>Telegram API</span></div>
+                </div>
             </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+                <div class="service-content">
+                    <h3>Frontend Web Development</h3>
+                    <p>Crafting dark, aesthetic, and responsive web interfaces. Bringing designs to life with smooth scroll effects, glassmorphism, and optimized Vanilla JS / React.</p>
+                    <div class="tools"><span>HTML/CSS</span><span>JavaScript</span><span>React</span></div>
+                </div>
+            </div>
+
         </div>
     </main>
     
     <script src="script.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY; let ratio = scrollY / 300; if (ratio > 1) ratio = 1;
+            const r = Math.round(18 * (1 - ratio)); const g = Math.round(14 * (1 - ratio)); const b = Math.round(31 * (1 - ratio));
+            document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            const glow = document.querySelector('.ambient-glow'); if(glow) glow.style.opacity = 1 - (ratio * 0.9);
+        });
+    </script>
 </body>
 </html>
