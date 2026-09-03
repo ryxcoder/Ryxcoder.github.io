@@ -4,160 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Prince - Android Developer</title>
-    
-    <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- ULTRA-PREMIUM BENTO GRID, DARK THEME & DYNAMIC SCROLL FX -->
     <style>
-        /* Force Deep Dark Mode Base */
-        body {
-            background-color: rgb(18, 14, 31); /* Starting Premium Dark Color */
-            color: #ffffff !important;
-        }
-
-        /* Override Global Navbar to Dark Glass */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: rgb(18, 14, 31); color: #ffffff !important; overflow-x: hidden; }
         .navbar {
-            background: rgba(10, 10, 10, 0.7) !important;
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            backdrop-filter: blur(15px) !important;
+            display: flex; overflow-x: auto; gap: 8px; padding: 10px 12px;
+            background: rgba(14, 10, 25, 0.75) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
+            border-radius: 50px; position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%); white-space: nowrap; width: max-content;
+            max-width: 92%; z-index: 100; scroll-behavior: smooth;
+            -ms-overflow-style: none; scrollbar-width: none;
         }
-        .navbar a { color: #888 !important; }
-        .navbar a.active, .navbar a:hover { color: #fff !important; background: rgba(255,255,255,0.1) !important; }
-
-        /* Ambient Background Glow */
+        .navbar::-webkit-scrollbar { display: none; }
+        .navbar a {
+            text-decoration: none; color: #888 !important; padding: 10px 22px;
+            border-radius: 30px; font-size: 14px; font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
+        }
+        .navbar a.active {
+            color: #ffffff !important;
+            background: linear-gradient(90deg, #ff007f, #7a00ff) !important;
+            box-shadow: 0 4px 15px rgba(122, 0, 255, 0.5);
+            font-weight: 800; transform: scale(1.05);
+        }
+        .navbar a:hover:not(.active) { color: #fff !important; background: rgba(255, 255, 255, 0.1) !important; }
+        
         .ambient-glow {
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70vw;
-            height: 70vw;
-            max-width: 600px;
-            max-height: 600px;
+            position: fixed; top: 10%; left: 50%; transform: translateX(-50%);
+            width: 70vw; height: 70vw; max-width: 600px; max-height: 600px;
             background: linear-gradient(45deg, rgba(122, 0, 255, 0.25), rgba(255, 0, 127, 0.15));
-            filter: blur(90px);
-            border-radius: 50%;
-            z-index: -1;
+            filter: blur(90px); border-radius: 50%; z-index: -1;
             animation: floatGlow 10s ease-in-out infinite alternate;
-            transition: opacity 0.1s ease;
         }
-
         @keyframes floatGlow {
             0% { transform: translate(-50%, 0) scale(1); }
             100% { transform: translate(-50%, 30px) scale(1.1); }
         }
-
-        /* Hero Text Update */
+        .about-section { padding: 120px 20px 60px 20px; max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: flex-start; }
         .about-header h1 {
-            font-size: 3.8rem;
-            font-weight: 900;
-            letter-spacing: -2px;
+            font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; letter-spacing: -2px;
             background: linear-gradient(to right, #ffffff, #666666);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards;
         }
-
         .about-header p {
-            color: #a0a0a0;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            color: #a0a0a0; font-size: 1.1rem; max-width: 600px; margin-bottom: 40px; line-height: 1.6;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards 0.1s;
         }
-
-        /* The Bento Box Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        /* Glassmorphism Cards */
+        .bento-grid { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; }
         .bento-card {
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: bentoFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; padding: 30px;
+            position: relative; overflow: hidden; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s forwards;
         }
-
-        /* Staggered Animations */
-        .bento-card:nth-child(1) { animation-delay: 0.1s; }
-        .bento-card:nth-child(2) { animation-delay: 0.2s; }
-        .bento-card:nth-child(3) { animation-delay: 0.3s; }
-        .bento-card:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes bentoFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .bento-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Card Internal Styling */
+        .bento-card:nth-child(1) { animation-delay: 0.2s; }
+        .bento-card:nth-child(2) { animation-delay: 0.3s; }
+        .bento-card:nth-child(3) { animation-delay: 0.4s; }
+        .bento-card:nth-child(4) { animation-delay: 0.5s; }
+        .bento-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); }
         .bento-icon {
-            width: 45px; height: 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 45px; height: 45px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;
+            display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .bento-icon svg { width: 22px; height: 22px; fill: #fff; }
-
-        .bento-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .bento-text {
-            font-size: 0.95rem;
-            color: #999;
-            line-height: 1.7;
-        }
-
-        /* Glowing Accent for specific cards */
+        .bento-title { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .bento-text { font-size: 0.95rem; color: #999; line-height: 1.7; }
         .card-large { grid-column: 1 / -1; }
-        
-        .accent-gradient {
-            background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(30,30,30,0.9));
-        }
-
+        .accent-gradient { background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(30,30,30,0.9)); }
         .accent-gradient::before {
             content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, #7a00ff, #ff007f, transparent);
-            opacity: 0.6;
+            background: linear-gradient(90deg, transparent, #7a00ff, #ff007f, transparent); opacity: 0.6;
         }
-
-        /* Desktop Grid */
-        @media (min-width: 768px) {
-            .bento-grid { grid-template-columns: 1fr 1fr; }
-            .card-large { grid-column: 1 / -1; }
-        }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @media (min-width: 768px) { .bento-grid { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
-
     <div class="ambient-glow"></div>
-
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
@@ -165,83 +93,41 @@
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
     </nav>
-
-    <!-- Masterpiece About Content -->
-    <main class="hero-section" style="padding-top: 100px; justify-content: flex-start; align-items: center; width: 100%;">
-        
-        <div class="about-header" style="width: 100%; max-width: 800px; text-align: left; padding: 0 10px;">
-            <h1 style="opacity: 0; animation: bentoFadeUp 0.8s forwards;">Behind the Code.</h1>
-            <p style="opacity: 0; animation: bentoFadeUp 0.8s forwards 0.1s;">I architect native experiences and automated solutions with a relentless focus on dark aesthetics, clean logic, and pixel-perfect execution.</p>
+    <main class="about-section">
+        <div class="about-header">
+            <h1>Behind the Code.</h1>
+            <p>I architect native experiences and automated solutions with a relentless focus on dark aesthetics, clean logic, and pixel-perfect execution.</p>
         </div>
-        
-        <!-- Bento Box Grid -->
-        <div class="bento-grid" style="padding: 0 10px;">
-            
-            <!-- Box 1: Core Stack -->
+        <div class="bento-grid">
             <div class="bento-card card-large accent-gradient">
-                <div class="bento-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                </div>
+                <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
                 <h3 class="bento-title">The Android & Web Architect</h3>
                 <p class="bento-text">Specializing in native Android development using Kotlin. Beyond mobile, I build dynamic, responsive web interfaces using HTML, CSS, JavaScript, and React, ensuring every digital touchpoint feels premium and intuitive.</p>
             </div>
-
-            <!-- Box 2: Automations -->
             <div class="bento-card">
-                <div class="bento-icon">
-                    <svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 15H9v-2h3v2zm5 0h-3v-2h3v2zM12 11H9V9h3v2zm5 0h-3V9h3v2z"/></svg>
-                </div>
+                <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 15H9v-2h3v2zm5 0h-3v-2h3v2zM12 11H9V9h3v2zm5 0h-3V9h3v2z"/></svg></div>
                 <h3 class="bento-title">Bots & Automations</h3>
                 <p class="bento-text">Crafting intelligent automated solutions. I develop and host custom Telegram bots and interactive Mini Apps (using Node.js and Python) that handle complex workflows effortlessly.</p>
             </div>
-
-            <!-- Box 3: Design Philosophy -->
             <div class="bento-card">
-                <div class="bento-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v5h5v-2h-3z"/></svg>
-                </div>
+                <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v5h5v-2h-3z"/></svg></div>
                 <h3 class="bento-title">The Aesthetic</h3>
                 <p class="bento-text">I believe in "Less is More". I am obsessed with deep dark modes, bold typography, strategic whitespace, and buttery-smooth animations that make UIs feel alive.</p>
             </div>
-
-            <!-- Box 4: The Vibe -->
-            <div class="bento-card card-large" style="margin-bottom: 40px;">
-                <div class="bento-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                </div>
+            <div class="bento-card card-large">
+                <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>
                 <h3 class="bento-title">Beyond the Screen</h3>
                 <p class="bento-text">When my IDE is closed, I'm usually strategizing my next move on the online chess board, curating sharp AI prompts for aesthetic visuals, or deep in the zone vibing to Seedhe Maut tracks like 11k and Kohra.</p>
             </div>
-
         </div>
-
     </main>
-    
     <script src="script.js"></script>
-    
-    <!-- 🟢 THE SCROLL MAGIC SCRIPT 🟢 -->
     <script>
         window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            
-            // Maximum scroll limit jahan color ekdum black ho jayega
-            let ratio = scrollY / 500; 
-            if (ratio > 1) ratio = 1;
-            
-            // Start Color RGB: (18, 14, 31) -> Premium Dark Purple/Blue
-            // End Color RGB: (0, 0, 0) -> Pure Black
-            const r = Math.round(18 * (1 - ratio));
-            const g = Math.round(14 * (1 - ratio));
-            const b = Math.round(31 * (1 - ratio));
-            
-            // Apply the dynamic background color smoothly
+            const scrollY = window.scrollY; let ratio = scrollY / 300; if (ratio > 1) ratio = 1;
+            const r = Math.round(18 * (1 - ratio)); const g = Math.round(14 * (1 - ratio)); const b = Math.round(31 * (1 - ratio));
             document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            
-            // Glow effect ko neeche jaane par dheere se kam karna
-            const glow = document.querySelector('.ambient-glow');
-            if(glow) {
-                glow.style.opacity = 1 - (ratio * 0.9); // Fades out slowly
-            }
+            const glow = document.querySelector('.ambient-glow'); if(glow) glow.style.opacity = 1 - (ratio * 0.9);
         });
     </script>
 </body>
