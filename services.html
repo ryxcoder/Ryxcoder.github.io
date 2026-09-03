@@ -4,28 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | Prince - Android Developer</title>
-    
-    <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
     <style>
-        /* Force Deep Dark Mode Base (Matches Ecosystem) */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: rgb(18, 14, 31); color: #ffffff !important; overflow-x: hidden; }
-
-        /* Premium Glass Navbar */
         .navbar {
-            display: flex; overflow-x: auto; gap: 5px; padding: 8px 10px;
-            background: rgba(15, 15, 15, 0.65) !important;
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important;
-            border-radius: 40px; position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
-            white-space: nowrap; width: max-content; max-width: 90%; z-index: 100;
+            display: flex; overflow-x: auto; gap: 8px; padding: 10px 12px;
+            background: rgba(14, 10, 25, 0.75) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
+            border-radius: 50px; position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%); white-space: nowrap; width: max-content;
+            max-width: 92%; z-index: 100; scroll-behavior: smooth;
+            -ms-overflow-style: none; scrollbar-width: none;
         }
         .navbar::-webkit-scrollbar { display: none; }
-        .navbar a { text-decoration: none; color: #999 !important; padding: 10px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; transition: all 0.3s ease; }
-        .navbar a.active, .navbar a:hover { background: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
-
-        /* Ambient Background Glow */
+        .navbar a {
+            text-decoration: none; color: #888 !important; padding: 10px 22px;
+            border-radius: 30px; font-size: 14px; font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
+        }
+        .navbar a.active {
+            color: #ffffff !important;
+            background: linear-gradient(90deg, #ff007f, #7a00ff) !important;
+            box-shadow: 0 4px 15px rgba(122, 0, 255, 0.5);
+            font-weight: 800; transform: scale(1.05);
+        }
+        .navbar a:hover:not(.active) { color: #fff !important; background: rgba(255, 255, 255, 0.1) !important; }
+        
         .ambient-glow {
             position: fixed; top: 15%; left: 50%; transform: translateX(-50%);
             width: 70vw; height: 70vw; max-width: 600px; max-height: 600px;
@@ -34,60 +41,43 @@
             animation: floatGlow 10s ease-in-out infinite alternate;
         }
         @keyframes floatGlow { 0% { transform: translate(-50%, 0) scale(1); } 100% { transform: translate(-50%, 30px) scale(1.1); } }
-
-        /* Main Container */
         .services-section { padding: 120px 20px 60px 20px; max-width: 900px; margin: 0 auto; }
-
         .page-header h1 {
             font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; letter-spacing: -2px;
-            background: linear-gradient(to right, #ffffff, #666666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #666666);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;
             opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards;
         }
         .page-header p {
             color: #a0a0a0; font-size: 1.1rem; max-width: 600px; line-height: 1.6; margin-bottom: 50px;
             opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards 0.1s;
         }
-
-        /* Services Grid */
         .services-grid { display: flex; flex-direction: column; gap: 20px; }
-
         .service-card {
             background: rgba(20, 20, 20, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px; padding: 30px; display: flex; gap: 20px; align-items: flex-start;
-            transition: all 0.4s ease; opacity: 0; transform: translateY(30px);
-            animation: fadeUp 0.8s forwards; position: relative; overflow: hidden;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 20px;
+            padding: 30px; display: flex; gap: 20px; align-items: flex-start; transition: all 0.4s ease;
+            opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s forwards;
         }
-        
         .service-card:nth-child(1) { animation-delay: 0.2s; }
         .service-card:nth-child(2) { animation-delay: 0.3s; }
         .service-card:nth-child(3) { animation-delay: 0.4s; }
-
-        .service-card:hover {
-            border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-
+        .service-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
         .service-icon {
             width: 60px; height: 60px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
             border-radius: 16px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1);
         }
         .service-icon svg { width: 30px; height: 30px; fill: #fff; }
-
         .service-content h3 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
         .service-content p { font-size: 1rem; color: #999; line-height: 1.6; margin-bottom: 15px; }
-
         .tools { display: flex; gap: 8px; flex-wrap: wrap; }
         .tools span { font-size: 12px; font-weight: 600; color: #ccc; background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 20px; }
-
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
         @media (max-width: 600px) { .service-card { flex-direction: column; } }
     </style>
 </head>
 <body>
-
     <div class="ambient-glow"></div>
-
     <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -95,16 +85,12 @@
         <a href="services.html" class="active">Services</a>
         <a href="contact.html">Contact</a>
     </nav>
-
     <main class="services-section">
         <div class="page-header">
             <h1>Expertise.</h1>
             <p>From native mobile applications to automated backend bots, I deliver end-to-end digital solutions tailored for performance and design.</p>
         </div>
-        
         <div class="services-grid">
-            
-            <!-- Service 1 -->
             <div class="service-card">
                 <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17.523 15.341l1.834-3.176a.395.395 0 0 0-.142-.538.397.397 0 0 0-.54.143l-1.87 3.24a10.9 10.9 0 0 0-4.805-1.127 10.93 10.93 0 0 0-4.805 1.127l-1.87-3.24a.395.395 0 0 0-.54-.143.395.395 0 0 0-.142.538l1.834 3.176C2.656 17.531.144 21.688 0 26.54h24c-.144-4.852-2.656-9.009-6.477-11.199zM6.5 22.793a1.442 1.442 0 1 1-.001-2.885 1.442 1.442 0 0 1 0 2.885zm11 0a1.442 1.442 0 1 1-.001-2.885 1.442 1.442 0 0 1 0 2.885z"/></svg></div>
                 <div class="service-content">
@@ -113,8 +99,6 @@
                     <div class="tools"><span>Kotlin</span><span>Android Studio</span><span>Firebase</span></div>
                 </div>
             </div>
-
-            <!-- Service 2 -->
             <div class="service-card">
                 <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 15H9v-2h3v2zm5 0h-3v-2h3v2zM12 11H9V9h3v2zm5 0h-3V9h3v2z"/></svg></div>
                 <div class="service-content">
@@ -123,8 +107,6 @@
                     <div class="tools"><span>Node.js</span><span>Python</span><span>Telegram API</span></div>
                 </div>
             </div>
-
-            <!-- Service 3 -->
             <div class="service-card">
                 <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
                 <div class="service-content">
@@ -133,10 +115,8 @@
                     <div class="tools"><span>HTML/CSS</span><span>JavaScript</span><span>React</span></div>
                 </div>
             </div>
-
         </div>
     </main>
-    
     <script src="script.js"></script>
     <script>
         window.addEventListener('scroll', () => {
