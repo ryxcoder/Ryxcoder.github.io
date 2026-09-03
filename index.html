@@ -4,165 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prince | Android Developer</title>
-    
-    <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    
     <style>
-        /* Base Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
-        body {
-            background-color: rgb(18, 14, 31); /* Premium Midnight Blue/Purple */
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* Ambient Glowing Orb */
+        body { background-color: rgb(18, 14, 31); color: #ffffff; overflow-x: hidden; position: relative; }
         .ambient-glow {
-            position: fixed;
-            top: 0%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80vw;
-            height: 80vw;
-            max-width: 500px;
-            max-height: 500px;
-            background: linear-gradient(45deg, rgba(122, 0, 255, 0.2), rgba(255, 0, 127, 0.1));
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: -1;
+            position: fixed; top: 5%; left: 50%; transform: translateX(-50%);
+            width: 80vw; height: 80vw; max-width: 600px; max-height: 600px;
+            background: linear-gradient(45deg, rgba(122, 0, 255, 0.15), rgba(255, 0, 127, 0.1));
+            filter: blur(80px); border-radius: 50%; z-index: 0; pointer-events: none;
             animation: floatGlow 8s ease-in-out infinite alternate;
         }
-
         @keyframes floatGlow {
             0% { transform: translate(-50%, 0) scale(1); }
             100% { transform: translate(-50%, 20px) scale(1.05); }
         }
-
-        /* Fixed Premium Glass Navbar */
         .navbar {
-            display: flex;
-            overflow-x: auto;
-            gap: 5px;
-            padding: 8px 10px;
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 40px;
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            width: max-content;
-            max-width: 90%;
-            z-index: 100;
+            display: flex; overflow-x: auto; gap: 8px; padding: 10px 12px;
+            background: rgba(14, 10, 25, 0.75) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
+            border-radius: 50px; position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%); white-space: nowrap; width: max-content;
+            max-width: 92%; z-index: 100; scroll-behavior: smooth;
+            -ms-overflow-style: none; scrollbar-width: none;
         }
         .navbar::-webkit-scrollbar { display: none; }
         .navbar a {
-            text-decoration: none; color: #999;
-            padding: 10px 18px; border-radius: 30px;
-            font-size: 14px; font-weight: 600; transition: 0.3s;
+            text-decoration: none; color: #888 !important; padding: 10px 22px;
+            border-radius: 30px; font-size: 14px; font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
         }
-        .navbar a.active, .navbar a:hover {
-            background: rgba(255, 255, 255, 0.1); color: #fff;
+        .navbar a.active {
+            color: #ffffff !important;
+            background: linear-gradient(90deg, #ff007f, #7a00ff) !important;
+            box-shadow: 0 4px 15px rgba(122, 0, 255, 0.5);
+            font-weight: 800; transform: scale(1.05);
         }
+        .navbar a:hover:not(.active) { color: #fff !important; background: rgba(255, 255, 255, 0.1) !important; }
+        
+        .bg-slider {
+            position: absolute; top: 50%; left: 0; transform: translateY(-50%);
+            width: 100vw; overflow: hidden; z-index: 1; pointer-events: none; user-select: none;
+        }
+        .bg-slider-track { display: flex; width: max-content; animation: slideMarquee 25s linear infinite; }
+        .bg-slider-text {
+            font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05); white-space: nowrap; padding-right: 50px;
+        }
+        @keyframes slideMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Hero Section Container */
         .hero-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 100px 20px 40px 20px;
-            max-width: 800px;
-            margin: 0 auto;
+            display: flex; flex-direction: column; justify-content: center;
+            min-height: 100vh; padding: 100px 20px 40px 20px;
+            max-width: 800px; margin: 0 auto; position: relative; z-index: 2;
         }
-
-        /* Staggered Animations */
-        .text-content > * {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .hero-content > * {
+            opacity: 0; transform: translateX(-40px);
+            animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .badge { animation-delay: 0.1s; }
-        h1 { animation-delay: 0.2s; }
-        h2 { animation-delay: 0.3s; }
-        p { animation-delay: 0.4s; }
-        .buttons { animation-delay: 0.5s; }
+        .main-title { animation-delay: 0.25s; }
+        .sub-title { animation-delay: 0.4s; }
+        .desc-text { animation-delay: 0.55s; }
+        .buttons { animation-delay: 0.7s; }
+        @keyframes slideInRight { to { opacity: 1; transform: translateX(0); } }
 
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Typography */
         .badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 14px; border-radius: 20px;
-            font-size: 12px; font-weight: 600; color: #ccc;
-            display: inline-block; margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #ccc;
+            display: inline-block; margin-bottom: 25px; backdrop-filter: blur(5px);
         }
-
-        h1 {
-            font-size: clamp(3rem, 12vw, 5rem); /* Auto-scales perfectly on mobile & PC */
-            line-height: 1.1; font-weight: 900;
-            letter-spacing: -2px; margin-bottom: 10px;
-            color: #fff;
+        .main-title {
+            font-size: clamp(3.2rem, 12vw, 5rem); line-height: 1.05; font-weight: 900;
+            letter-spacing: -2px; margin-bottom: 10px; color: #fff;
         }
         .gradient-text {
-            background: linear-gradient(180deg, #ffffff 0%, #666666 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #777777 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        
-        h2 {
-            font-size: clamp(1.4rem, 6vw, 2rem);
-            font-weight: 800; margin-bottom: 20px;
+        .sub-title {
+            font-size: clamp(1.4rem, 6vw, 2rem); font-weight: 800; margin-bottom: 25px;
             background: linear-gradient(90deg, #ff007f, #7a00ff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            display: inline-block;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
         }
-
-        p {
-            color: #aaa; font-size: 15px; line-height: 1.7; 
-            margin-bottom: 35px; max-width: 600px;
-        }
-
-        /* Premium Buttons */
+        .desc-text { color: #a8a8a8; font-size: 15px; line-height: 1.7; margin-bottom: 35px; max-width: 600px; }
         .buttons { display: flex; gap: 15px; flex-wrap: wrap; }
-        
         .btn-primary, .btn-secondary {
-            padding: 14px 28px; border-radius: 12px;
-            font-size: 15px; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease; display: inline-block;
+            padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease; display: inline-block;
         }
-        
         .btn-primary {
-            background: linear-gradient(90deg, #ff007f, #7a00ff);
-            color: #fff; border: none;
-            box-shadow: 0 5px 15px rgba(122, 0, 255, 0.3);
+            background: linear-gradient(90deg, #ff007f, #7a00ff); color: #fff; border: none;
+            box-shadow: 0 4px 15px rgba(122, 0, 255, 0.3);
         }
-        .btn-primary:hover {
-            transform: translateY(-3px); box-shadow: 0 8px 20px rgba(122, 0, 255, 0.5);
-        }
-
+        .btn-primary:hover { transform: translateX(4px); box-shadow: 0 8px 25px rgba(122, 0, 255, 0.5); }
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff; backdrop-filter: blur(10px);
         }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); transform: translateX(4px); }
     </style>
 </head>
 <body>
-
     <div class="ambient-glow"></div>
-
+    <div class="bg-slider">
+        <div class="bg-slider-track">
+            <span class="bg-slider-text">ANDROID DEVELOPER • UI/UX ARCHITECT • KOTLIN EXPERT • </span>
+            <span class="bg-slider-text">ANDROID DEVELOPER • UI/UX ARCHITECT • KOTLIN EXPERT • </span>
+        </div>
+    </div>
     <nav class="navbar">
         <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
@@ -170,37 +122,27 @@
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
     </nav>
-
     <main class="hero-section">
-        <div class="text-content">
-            <span class="badge">• Available for freelance work</span>
-            
-            <h1>Hi, I'm <br><span class="gradient-text">Prince</span></h1>
-            <h2>Android Developer</h2>
-            
-            <p>I build smooth, functional, and user-centered digital experiences. From crafting native applications using Kotlin to structuring clean web layouts, I focus on writing thoughtful logic and clean code to bring ideas to life.</p>
-            
+        <div class="hero-content">
+            <div class="badge">• Available for freelance work</div>
+            <h1 class="main-title">Hi, I'm <br><span class="gradient-text">Prince</span></h1>
+            <h2 class="sub-title">Android Developer</h2>
+            <p class="desc-text">I build smooth, functional, and user-centered digital experiences. From crafting native applications using Kotlin to structuring clean web layouts, I focus on writing thoughtful logic and clean code to bring ideas to life.</p>
             <div class="buttons">
                 <a href="projects.html" class="btn-primary">View Projects</a>
                 <a href="contact.html" class="btn-secondary">Hire Me</a>
             </div>
         </div>
     </main>
-    
     <script src="script.js"></script>
-
     <script>
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
-            let ratio = scrollY / 300; 
-            if (ratio > 1) ratio = 1;
-            
+            let ratio = scrollY / 300; if (ratio > 1) ratio = 1;
             const r = Math.round(18 * (1 - ratio));
             const g = Math.round(14 * (1 - ratio));
             const b = Math.round(31 * (1 - ratio));
-            
             document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            
             const glow = document.querySelector('.ambient-glow');
             if(glow) glow.style.opacity = 1 - (ratio * 0.8);
         });
