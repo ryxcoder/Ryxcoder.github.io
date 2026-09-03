@@ -9,11 +9,9 @@ navLinks.forEach(link => {
     link.classList.remove('active');
     const linkPath = link.getAttribute('href');
     
-    // Check which page is active
     if (currentLocation.includes(linkPath) || (currentLocation.endsWith('/') && linkPath === 'index.html')) {
         link.classList.add('active');
         
-        // Auto-Scroll Navbar to center the Active Button
         if (navbar) {
             setTimeout(() => {
                 const linkRect = link.getBoundingClientRect();
@@ -38,23 +36,20 @@ if (currentIndex === -1) currentIndex = 0;
 let touchStartX = 0;
 let touchMoveX = 0;
 let isDragging = false;
-const mainContent = document.querySelector('main'); // Hum sirf content slide karenge, navbar nahi
+const mainContent = document.querySelector('main'); 
 
 document.addEventListener('touchstart', function(event) {
     touchStartX = event.touches[0].screenX;
     touchMoveX = touchStartX;
     
-    // 🔥 ANDROID EDGE FIX: Agar ekdum edge (kinare) se swipe kiya, toh humara code ruk jayega 
-    // taaki Android ka system Back button properly kaam kar sake.
+    // Android Edge Fix
     if (touchStartX < 25 || touchStartX > window.innerWidth - 25) {
         isDragging = false;
         return;
     }
     
     isDragging = true;
-    if (mainContent) {
-        mainContent.style.transition = 'none'; // Ungli ke sath chipak kar chalne ke liye
-    }
+    if (mainContent) mainContent.style.transition = 'none';
 }, {passive: true});
 
 document.addEventListener('touchmove', function(event) {
@@ -62,12 +57,12 @@ document.addEventListener('touchmove', function(event) {
     touchMoveX = event.touches[0].screenX;
     let deltaX = touchMoveX - touchStartX;
 
-    // RUBBER BAND EFFECT: Agar Home se pichhe ya Contact se aage jane ki koshish ki toh stretch hoga
+    // Rubber Band Effect
     if ((currentIndex === 0 && deltaX > 0) || (currentIndex === pages.length - 1 && deltaX < 0)) {
         deltaX = deltaX * 0.2; 
     }
 
-    // 🔥 LIVE ANIMATION: Page ko ungli ke sath khiskana aur fade karna
+    // Live Follow
     if (mainContent) {
         mainContent.style.transform = `translateX(${deltaX}px)`;
         mainContent.style.opacity = 1 - (Math.abs(deltaX) / (window.innerWidth * 1.2));
@@ -79,12 +74,9 @@ document.addEventListener('touchend', function(event) {
     isDragging = false;
     
     let deltaX = touchMoveX - touchStartX;
-    const swipeThreshold = 80; // Kitna slide karna zaroori hai page change ke liye
+    const swipeThreshold = 80; 
 
-    if (mainContent) {
-        // Animation wapas on kar do taaki smooth finish ho
-        mainContent.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease';
-    }
+    if (mainContent) mainContent.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease';
 
     // 👈 Swipe Left (Next Page)
     if (deltaX < -swipeThreshold && currentIndex < pages.length - 1) {
@@ -102,11 +94,59 @@ document.addEventListener('touchend', function(event) {
         }
         setTimeout(() => { window.location.href = pages[currentIndex - 1]; }, 300);
     }
-    // 🔙 Cancel Swipe (Agar aadha slide karke chhod diya toh bounce back karega)
+    // 🔙 Cancel Swipe
     else {
         if (mainContent) {
             mainContent.style.transform = `translateX(0)`;
             mainContent.style.opacity = '1';
         }
     }
+});
+
+// ==========================================
+// 3. 🎵 CUTE PREMIUM UI SOUND EFFECT 🎵
+// ==========================================
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+
+function playCutePop() {
+    // Sirf tabhi context banayenge jab user pehli baar touch kare (Browser policy)
+    if (!audioCtx) {
+        audioCtx = new AudioContext();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    // Sound generator (Math Magic)
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = 'sine'; // Smooth aur soft awaz
+    
+    // Awaz ko halka sa patla (high pitch) karke turant bhari karna (Bubble Pop effect)
+    oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); 
+    oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1);
+
+    // Volume set karna (Bohot loud nahi, ekdum premium soft)
+    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.1); // Sirf 0.1 second ka click
+}
+
+// Har clickable chiz par yeh awaz laga do (Touch aur Click dono par)
+['touchstart', 'mousedown'].forEach(evt => {
+    document.addEventListener(evt, function(event) {
+        // Pata lagao ki user ne kisi button, link ya card par tap kiya hai ya nahi
+        const isClickable = event.target.closest('a, button, .service-card, .project-card, .contact-card, .bento-card');
+        
+        if (isClickable) {
+            playCutePop();
+        }
+    }, { passive: true });
 });
