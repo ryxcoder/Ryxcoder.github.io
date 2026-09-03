@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Prince - Android Developer</title>
-    
-    <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
     <style>
-        /* Force Deep Dark Mode Base */
-        body {
-            background-color: rgb(18, 14, 31); /* Matching Premium Dark Color */
-            color: #ffffff !important;
-            overflow-x: hidden;
-        }
-
-        /* Override Global Navbar to Dark Glass */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: rgb(18, 14, 31); color: #ffffff !important; overflow-x: hidden; }
         .navbar {
-            display: flex; overflow-x: auto; gap: 5px; padding: 8px 10px;
-            background: rgba(15, 15, 15, 0.65) !important;
-            border: 1px solid rgba(255, 255, 255, 0.05) !important;
-            backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important;
-            border-radius: 40px; position: fixed;
-            top: 15px; left: 50%; transform: translateX(-50%);
-            white-space: nowrap; width: max-content; max-width: 90%;
-            z-index: 100;
+            display: flex; overflow-x: auto; gap: 8px; padding: 10px 12px;
+            background: rgba(14, 10, 25, 0.75) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px) !important; -webkit-backdrop-filter: blur(25px) !important;
+            border-radius: 50px; position: fixed; top: 20px; left: 50%;
+            transform: translateX(-50%); white-space: nowrap; width: max-content;
+            max-width: 92%; z-index: 100; scroll-behavior: smooth;
+            -ms-overflow-style: none; scrollbar-width: none;
         }
         .navbar::-webkit-scrollbar { display: none; }
-        .navbar a { text-decoration: none; color: #999 !important; padding: 10px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; transition: all 0.3s ease; }
-        .navbar a.active, .navbar a:hover { background: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
-
-        /* Ambient Background Glow */
+        .navbar a {
+            text-decoration: none; color: #888 !important; padding: 10px 22px;
+            border-radius: 30px; font-size: 14px; font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); position: relative;
+        }
+        .navbar a.active {
+            color: #ffffff !important;
+            background: linear-gradient(90deg, #ff007f, #7a00ff) !important;
+            box-shadow: 0 4px 15px rgba(122, 0, 255, 0.5);
+            font-weight: 800; transform: scale(1.05);
+        }
+        .navbar a:hover:not(.active) { color: #fff !important; background: rgba(255, 255, 255, 0.1) !important; }
+        
         .ambient-glow {
             position: fixed; top: 10%; left: 50%; transform: translateX(-50%);
             width: 70vw; height: 70vw; max-width: 600px; max-height: 600px;
@@ -39,119 +40,52 @@
             filter: blur(90px); border-radius: 50%; z-index: -1;
             animation: floatGlow 10s ease-in-out infinite alternate;
         }
-
         @keyframes floatGlow {
             0% { transform: translate(-50%, 0) scale(1); }
             100% { transform: translate(-50%, 30px) scale(1.1); }
         }
-
-        /* Main Container */
-        .projects-section {
-            padding: 120px 20px 60px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        /* Header Animation */
+        .projects-section { padding: 120px 20px 60px 20px; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: flex-start; }
         .page-header { width: 100%; margin-bottom: 50px; }
         .page-header h1 {
-            font-size: clamp(3rem, 10vw, 4.5rem);
-            font-weight: 900; letter-spacing: -2px;
+            font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; letter-spacing: -2px;
             background: linear-gradient(to right, #ffffff, #666666);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            opacity: 0; transform: translateY(20px);
-            animation: fadeUp 0.8s forwards;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards;
         }
         .page-header p {
             color: #a0a0a0; font-size: 1.1rem; max-width: 500px; line-height: 1.6;
-            opacity: 0; transform: translateY(20px);
-            animation: fadeUp 0.8s forwards 0.1s;
+            opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards 0.1s;
         }
-
-        /* Projects Grid Layout */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            width: 100%;
-        }
-
-        /* Premium Glass Project Card */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; width: 100%; }
         .project-card {
-            background: rgba(20, 20, 20, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex; flex-direction: column;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0; transform: translateY(30px);
-            animation: fadeUp 0.8s forwards;
+            background: rgba(20, 20, 20, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 20px;
+            overflow: hidden; display: flex; flex-direction: column; transition: all 0.4s ease;
+            opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s forwards;
         }
-        
-        /* Staggered load for cards */
         .project-card:nth-child(1) { animation-delay: 0.2s; }
         .project-card:nth-child(2) { animation-delay: 0.3s; }
         .project-card:nth-child(3) { animation-delay: 0.4s; }
         .project-card:nth-child(4) { animation-delay: 0.5s; }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Abstract Cover Art */
-        .project-cover {
-            height: 180px;
-            width: 100%;
-            position: relative;
-        }
-        /* Individual Cover Gradients */
+        .project-card:hover { transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); }
+        .project-cover { height: 180px; width: 100%; position: relative; }
         .cover-1 { background: linear-gradient(135deg, #FF007F, #4A00E0); }
         .cover-2 { background: linear-gradient(135deg, #00C9FF, #92FE9D); }
         .cover-3 { background: linear-gradient(135deg, #FDBB2D, #22C1C3); }
         .cover-4 { background: linear-gradient(135deg, #8E2DE2, #4A00E0); }
-
         .project-info { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
-        
-        /* Tech Stack Tags */
         .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
-        .tag {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ddd; font-size: 11px; font-weight: 700;
-            padding: 4px 10px; border-radius: 20px; letter-spacing: 0.5px;
-        }
-
+        .tag { background: rgba(255, 255, 255, 0.1); color: #ddd; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
         .project-title { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
         .project-desc { font-size: 0.95rem; color: #999; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-
-        /* View Link */
-        .view-link {
-            display: inline-flex; align-items: center; gap: 5px;
-            color: #fff; font-size: 0.9rem; font-weight: 700; text-decoration: none;
-            transition: gap 0.3s ease;
-        }
+        .view-link { display: inline-flex; align-items: center; gap: 5px; color: #fff; font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: gap 0.3s ease; }
         .view-link:hover { gap: 10px; color: #ff007f; }
         .view-link svg { width: 16px; height: 16px; fill: currentColor; }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (min-width: 768px) {
-            .projects-section { padding-top: 150px; }
-        }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-
     <div class="ambient-glow"></div>
-
     <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -159,93 +93,57 @@
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
     </nav>
-
     <main class="projects-section">
-        
         <div class="page-header">
             <h1>Selected Works.</h1>
             <p>A showcase of native Android applications, automated bots, and premium digital experiences crafted with clean code.</p>
         </div>
-        
         <div class="projects-grid">
-            
             <div class="project-card">
                 <div class="project-cover cover-1"></div>
                 <div class="project-info">
-                    <div class="tech-tags">
-                        <span class="tag">KOTLIN</span>
-                        <span class="tag">ANDROID</span>
-                        <span class="tag">FIREBASE</span>
-                    </div>
+                    <div class="tech-tags"><span class="tag">KOTLIN</span><span class="tag">ANDROID</span><span class="tag">FIREBASE</span></div>
                     <h3 class="project-title">E-Commerce App</h3>
                     <p class="project-desc">A full-featured native Android application with real-time database, secure authentication, and a butter-smooth UI.</p>
                     <a href="#" class="view-link">View Project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
                 </div>
             </div>
-
             <div class="project-card">
                 <div class="project-cover cover-2"></div>
                 <div class="project-info">
-                    <div class="tech-tags">
-                        <span class="tag">NODE.JS</span>
-                        <span class="tag">PYTHON</span>
-                        <span class="tag">BOT API</span>
-                    </div>
+                    <div class="tech-tags"><span class="tag">NODE.JS</span><span class="tag">PYTHON</span><span class="tag">BOT API</span></div>
                     <h3 class="project-title">Tap Duel Mini App</h3>
                     <p class="project-desc">An interactive Telegram Mini App game built with automated server logic handling multiple players in real-time.</p>
                     <a href="#" class="view-link">View Project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
                 </div>
             </div>
-
             <div class="project-card">
                 <div class="project-cover cover-3"></div>
                 <div class="project-info">
-                    <div class="tech-tags">
-                        <span class="tag">HTML/CSS</span>
-                        <span class="tag">JS</span>
-                        <span class="tag">UI/UX</span>
-                    </div>
+                    <div class="tech-tags"><span class="tag">HTML/CSS</span><span class="tag">JS</span><span class="tag">UI/UX</span></div>
                     <h3 class="project-title">Premium Portfolio</h3>
                     <p class="project-desc">An ultra-minimalist, high-performance portfolio engineered with glassmorphism, fluid animations, and a dynamic dark mode.</p>
                     <a href="#" class="view-link">View Project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
                 </div>
             </div>
-
             <div class="project-card">
                 <div class="project-cover cover-4"></div>
                 <div class="project-info">
-                    <div class="tech-tags">
-                        <span class="tag">KOTLIN</span>
-                        <span class="tag">ROOM DB</span>
-                    </div>
+                    <div class="tech-tags"><span class="tag">KOTLIN</span><span class="tag">ROOM DB</span></div>
                     <h3 class="project-title">Habit Tracker</h3>
                     <p class="project-desc">A productivity tool focusing on local data persistence using Room Database, featuring daily streaks and a clean dark aesthetic.</p>
                     <a href="#" class="view-link">View Project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
                 </div>
             </div>
-
         </div>
     </main>
-    
     <script src="script.js"></script>
-
     <script>
         window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            
-            let ratio = scrollY / 400; 
-            if (ratio > 1) ratio = 1;
-            
-            const r = Math.round(18 * (1 - ratio));
-            const g = Math.round(14 * (1 - ratio));
-            const b = Math.round(31 * (1 - ratio));
-            
+            const scrollY = window.scrollY; let ratio = scrollY / 300; if (ratio > 1) ratio = 1;
+            const r = Math.round(18 * (1 - ratio)); const g = Math.round(14 * (1 - ratio)); const b = Math.round(31 * (1 - ratio));
             document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            
-            const glow = document.querySelector('.ambient-glow');
-            if(glow) {
-                glow.style.opacity = 1 - (ratio * 0.9);
-            }
+            const glow = document.querySelector('.ambient-glow'); if(glow) glow.style.opacity = 1 - (ratio * 0.9);
         });
     </script>
 </body>
