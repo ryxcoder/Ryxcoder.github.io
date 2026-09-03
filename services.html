@@ -8,6 +8,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: rgb(18, 14, 31); color: #ffffff !important; overflow-x: hidden; }
+        
         .navbar {
             display: flex; overflow-x: auto; gap: 8px; padding: 10px 12px;
             background: rgba(14, 10, 25, 0.75) !important;
@@ -41,6 +42,7 @@
             animation: floatGlow 10s ease-in-out infinite alternate;
         }
         @keyframes floatGlow { 0% { transform: translate(-50%, 0) scale(1); } 100% { transform: translate(-50%, 30px) scale(1.1); } }
+        
         .services-section { padding: 120px 20px 60px 20px; max-width: 900px; margin: 0 auto; }
         .page-header h1 {
             font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; letter-spacing: -2px;
@@ -52,32 +54,82 @@
             color: #a0a0a0; font-size: 1.1rem; max-width: 600px; line-height: 1.6; margin-bottom: 50px;
             opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s forwards 0.1s;
         }
+        
         .services-grid { display: flex; flex-direction: column; gap: 20px; }
+
+        /* 🔥 PREMIUM INTERACTIVE CARDS 🔥 */
         .service-card {
-            background: rgba(20, 20, 20, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 20px;
-            padding: 30px; display: flex; gap: 20px; align-items: flex-start; transition: all 0.4s ease;
-            opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s forwards;
+            background: rgba(20, 20, 20, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
+            border-radius: 20px; padding: 30px; 
+            display: flex; gap: 20px; align-items: flex-start; 
+            
+            /* Animation Setup */
+            opacity: 0; transform: translateY(30px); 
+            animation: fadeUp 0.8s forwards;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+            
+            /* Make it feel clickable */
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent; /* Removes Android Blue Tap Color */
+            position: relative; overflow: hidden;
         }
+        
         .service-card:nth-child(1) { animation-delay: 0.2s; }
         .service-card:nth-child(2) { animation-delay: 0.3s; }
         .service-card:nth-child(3) { animation-delay: 0.4s; }
-        .service-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        .service-icon {
-            width: 60px; height: 60px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
-            border-radius: 16px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1);
+
+        /* Normal Hover (For PC) */
+        .service-card:hover { 
+            border-color: rgba(255, 255, 255, 0.2); 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
         }
-        .service-icon svg { width: 30px; height: 30px; fill: #fff; }
+
+        /* 💥 THE TAP / CLICK MAGIC (For Phone) 💥 */
+        .service-card:active {
+            transform: scale(0.95); /* Deep squish press */
+            border-color: #ff007f; /* Neon pink border */
+            background: rgba(30, 20, 40, 0.7); /* Slightly brighter dark tint */
+            box-shadow: 0 0 35px rgba(255, 0, 127, 0.3), inset 0 0 20px rgba(122, 0, 255, 0.2); /* Outer and Inner Glow */
+            transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease, background 0.1s ease; /* Instant snap */
+        }
+
+        .service-icon {
+            width: 60px; height: 60px; 
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+            border-radius: 16px; display: flex; justify-content: center; align-items: center; 
+            flex-shrink: 0; border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+        }
+        .service-icon svg { width: 30px; height: 30px; fill: #fff; transition: fill 0.3s ease; }
+
+        /* Icon Glows Up when Card is Tapped */
+        .service-card:active .service-icon {
+            background: linear-gradient(135deg, #ff007f, #7a00ff);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+            transform: scale(1.1); /* Icon slightly grows */
+            transition: all 0.1s ease;
+        }
+
         .service-content h3 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
         .service-content p { font-size: 1rem; color: #999; line-height: 1.6; margin-bottom: 15px; }
+        
         .tools { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tools span { font-size: 12px; font-weight: 600; color: #ccc; background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 20px; }
+        .tools span { font-size: 12px; font-weight: 600; color: #ccc; background: rgba(255,255,255,0.05); padding: 4px 12px; border-radius: 20px; transition: background 0.3s ease; }
+        
+        /* Badges also glow slightly when card is tapped */
+        .service-card:active .tools span { background: rgba(255, 255, 255, 0.15); }
+
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 600px) { .service-card { flex-direction: column; } }
     </style>
 </head>
 <body>
     <div class="ambient-glow"></div>
+    
     <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -85,12 +137,15 @@
         <a href="services.html" class="active">Services</a>
         <a href="contact.html">Contact</a>
     </nav>
+    
     <main class="services-section">
         <div class="page-header">
             <h1>Expertise.</h1>
             <p>From native mobile applications to automated backend bots, I deliver end-to-end digital solutions tailored for performance and design.</p>
         </div>
         <div class="services-grid">
+            
+            <!-- Service 1 -->
             <div class="service-card">
                 <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17.523 15.341l1.834-3.176a.395.395 0 0 0-.142-.538.397.397 0 0 0-.54.143l-1.87 3.24a10.9 10.9 0 0 0-4.805-1.127 10.93 10.93 0 0 0-4.805 1.127l-1.87-3.24a.395.395 0 0 0-.54-.143.395.395 0 0 0-.142.538l1.834 3.176C2.656 17.531.144 21.688 0 26.54h24c-.144-4.852-2.656-9.009-6.477-11.199zM6.5 22.793a1.442 1.442 0 1 1-.001-2.885 1.442 1.442 0 0 1 0 2.885zm11 0a1.442 1.442 0 1 1-.001-2.885 1.442 1.442 0 0 1 0 2.885z"/></svg></div>
                 <div class="service-content">
@@ -99,6 +154,8 @@
                     <div class="tools"><span>Kotlin</span><span>Android Studio</span><span>Firebase</span></div>
                 </div>
             </div>
+            
+            <!-- Service 2 -->
             <div class="service-card">
                 <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-9 15H9v-2h3v2zm5 0h-3v-2h3v2zM12 11H9V9h3v2zm5 0h-3V9h3v2z"/></svg></div>
                 <div class="service-content">
@@ -107,6 +164,8 @@
                     <div class="tools"><span>Node.js</span><span>Python</span><span>Telegram API</span></div>
                 </div>
             </div>
+            
+            <!-- Service 3 -->
             <div class="service-card">
                 <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
                 <div class="service-content">
@@ -115,8 +174,10 @@
                     <div class="tools"><span>HTML/CSS</span><span>JavaScript</span><span>React</span></div>
                 </div>
             </div>
+            
         </div>
     </main>
+    
     <script src="script.js"></script>
     <script>
         window.addEventListener('scroll', () => {
